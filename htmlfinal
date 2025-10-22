@@ -1,45 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event-Driven Feedback Form</title>
 </head>
-
 <body>
+  <form id="feedbackForm">
+    <h2>Event-Driven Feedback Form</h2>
 
-<form id="feedbackForm">
+    <label for="name">Name:</label>
+    <input type="text" id="name" placeholder="Enter your name" required><br><br>
 
-<h2>Event-Driven Feedback Form</h2>
+    <label for="email">Email:</label>
+    <input type="email" id="email" placeholder="Enter your email" required><br><br>
 
-<Label Name:</label>
+    <label for="type">Feedback Type:</label>
+    <select id="type" onchange="showTypeMessage()">
+      <option value="">Select one</option>
+      <option value="Positive">Positive</option>
+      <option value="Negative">Negative</option>
+    </select><br><br>
 
-<input type="text" id="name" placeholder="Enter your name" required>
+    <label for="message">Message:</label>
+    <textarea id="message" onkeyup="countCharacters()" maxlength="150"></textarea>
+    <p id="charcount">150 characters remaining</p><br>
 
-<Label>Email:</label>
+    <input type="checkbox" id="subscribe" onchange="toggleSubscription()"> Subscribe to newsletter<br><br>
 
-<input type="email" id="name" placeholder="Enter your email" required>
+    <button type="submit">Submit</button>
+    <button type="reset">Reset</button>
 
-<Label>Feedback Type: </label>
+    <p id="response"></p>
+  </form>
 
-<select id="type" onchange" "showTypeMessage()">
+  <script>
+    const messageBox = document.getElementById('message');
+    const charCount = document.getElementById('charcount');
+    const form = document.getElementById('feedbackForm');
+    const response = document.getElementById('response');
+    const subscribe = document.getElementById('subscribe');
 
-<option value="">Select one</option>
+    function countCharacters() {
+      const remaining = 150 - messageBox.value.length;
+      charCount.textContent = `${remaining} characters remaining`;
+    }
 
-<option value="Positive">Positive</option>
+    function showTypeMessage() {
+      alert("You selected a feedback type!");
+    }
 
-<option value="Negative">Negative</option>
+    function toggleSubscription() {
+      if (subscribe.checked) {
+        alert("Thank you for subscribing!");
+      } else {
+        alert("You have unsubscribed.");
+      }
+    }
 
-</select>
+    form.onsubmit = function(event) {
+      event.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
 
-<label>Message: </label>
-
-<textarea id="message" onkeyup="count Characters()" maxlength="150"</textarea>
-
-<p id="charCount">150 characters remaining</p>
-
-<input type="checkbox" id="subscribe" onchange="toggleSubscription()">Subscribe to newsletter
-
-<button type="submit">Submit</button>
-
-<button type="reset" onclick="resetForm()">Reset</button>
-
-<p id="response" class="success"></p>
-
-<script>
-
-conts messageBox document.getElementById('message'); conts charCount=document.getElementById('charcount');
+      if (name === "" || email === "") {
+        response.style.color = "red";
+        response.textContent = "Please fill out all required fields.";
+      } else {
+        response.style.color = "green";
+        response.textContent = "Thank you for your feedback!";
+        form.reset();
+        charCount.textContent = "150 characters remaining";
+      }
+    };
+  </script>
+</body>
+</html>
