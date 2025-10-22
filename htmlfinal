@@ -1,0 +1,45 @@
+</head>
+
+<body>
+
+<form id="feedbackForm">
+
+<h2>Event-Driven Feedback Form</h2>
+
+<Label Name:</label>
+
+<input type="text" id="name" placeholder="Enter your name" required>
+
+<Label>Email:</label>
+
+<input type="email" id="name" placeholder="Enter your email" required>
+
+<Label>Feedback Type: </label>
+
+<select id="type" onchange" "showTypeMessage()">
+
+<option value="">Select one</option>
+
+<option value="Positive">Positive</option>
+
+<option value="Negative">Negative</option>
+
+</select>
+
+<label>Message: </label>
+
+<textarea id="message" onkeyup="count Characters()" maxlength="150"</textarea>
+
+<p id="charCount">150 characters remaining</p>
+
+<input type="checkbox" id="subscribe" onchange="toggleSubscription()">Subscribe to newsletter
+
+<button type="submit">Submit</button>
+
+<button type="reset" onclick="resetForm()">Reset</button>
+
+<p id="response" class="success"></p>
+
+<script>
+
+conts messageBox document.getElementById('message'); conts charCount=document.getElementById('charcount');
