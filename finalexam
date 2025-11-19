@@ -1,0 +1,105 @@
+import java.util.Scanner;
+
+public class FinalExam {
+
+    public static void main(String[] args) {
+
+        Scanner in = new Scanner(System.in);
+        int[] array = new int[10];
+        int choice;
+
+        System.out.println("===========================================");
+        System.out.println("Sample Program by Mr. de Guzman Tobit");
+        System.out.println("===========================================");
+
+        do {
+            System.out.println("========================================");
+            System.out.println("\tMENU");
+            System.out.println("========================================");
+            System.out.println("(1) Enter 10 Element Values");
+            System.out.println("(2) Sort Ascending");
+            System.out.println("(3) Sort Descending");
+            System.out.println("(4) Search Element");
+            System.out.println("(5) Exit");
+            System.out.println("========================================");
+            System.out.print("Enter your choice: ");
+            choice = in.nextInt();
+
+            switch (choice) {
+                case 1:
+                    System.out.println("Enter 10 Element Values:");
+                    for (int i = 0; i < 10; i++) {
+                        array[i] = in.nextInt();
+                    }
+                    break;
+
+                case 2:
+                    for (int i = 0; i < array.length - 1; i++) {
+                        for (int j = 0; j < array.length - 1 - i; j++) {
+                            if (array[j] > array[j + 1]) {
+                                int temp = array[j];
+                                array[j] = array[j + 1];
+                                array[j + 1] = temp;
+                            }
+                        }
+                    }
+                    System.out.println("========================================");
+                    System.out.print("Sorted Ascending: ");
+                    for (int i = 0; i < array.length; i++) {
+                        System.out.print(array[i] + " ");
+                    }
+                    System.out.println();
+                    break;
+
+                case 3:
+                    for (int i = 0; i < array.length - 1; i++) {
+                        for (int j = 0; j < array.length - 1 - i; j++) {
+                            if (array[j] < array[j + 1]) {
+                                int temp = array[j];
+                                array[j] = array[j + 1];
+                                array[j + 1] = temp;
+                            }
+                        }
+                    }
+                    System.out.println("========================================");
+                    System.out.print("Sorted Descending: ");
+                    for (int i = 0; i < array.length; i++) {
+                        System.out.print(array[i] + " ");
+                    }
+                    System.out.println();
+                    break;
+
+                case 4:
+                    System.out.print("Enter value to search: ");
+                    int searchV = in.nextInt();
+                    int index = -1;
+
+                    for (int i = 0; i < array.length; i++) {
+                        if (array[i] == searchV) {
+                            index = i;
+                            break;
+                        }
+                    }
+
+                    if (index == -1) {
+                        System.out.println("Value not found.");
+                    } else {
+                        System.out.println("========================================");
+                        System.out.println("Value found at index: " + index);
+                    }
+                    break;
+
+                case 5:
+                    System.out.println("========================================");
+                    System.out.println("Thank you for using my program!");
+                    break;
+
+                default:
+                    System.out.println("Invalid input please try again!");
+            }
+
+        } while (choice != 5);
+
+        in.close();
+    }
+}
